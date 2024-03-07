@@ -1,0 +1,35 @@
+<!DOCTYPE html><!--ログイン画面。ログイン・パスワード入力とログインボタン-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<head>
+	<title>Animram</title>
+</head>
+
+<body>
+	<div class="users-new-wrapper" layout:fragment="contents">
+		<div class="container">
+			<div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
+			<div class="row">
+				<main class="col-md-4 mx-auto">
+					<h1 class="text-center text-black">Log in</h1>
+					<form method="post" th:action="@{/login}">
+						<div class="mb-3">
+							<label class="form-label text-black" for="session_name">名前</label>
+							<input class="form-control" type="text" name="username" id="session_name" />
+						</div>
+						<div class="mb-3">
+							<label class="form-label text-black" for="session_password">パスワード</label>
+							<input class="form-control" type="password" name="password" id="session_password" />
+						</div>
+						    <input type="submit" value="ログイン" class="btn w-100 btn btn-outline-dark" />
+					</form>
+				</main>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+    <head>
+        <title>Animram</title>
+    </head>
+    <body>
+		<div class="reviews-new-wrapper" layout:fragment="contents">
+			<div class="container">
+				<div class = "row">
+					<div class="col-md-6 mx-auto">
+						<div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
+						 <h1 class="text-center" >レビュー投稿</h1>
+						 <form class="new_review" id="new_review" th:action="@{/animals/__${form.animalId}__/review/new}" th:method="POST" th:object="${form}" >
+                       		 <div layout:replace="~{layouts/common::messages}"></div>
+                        		<div class="mb-3">
+								 <!--最初にレビュー投稿する時、初期値「０」を保存する。それからレビューいいねするたびカウントが増えるようにevaluateReviewコントローラーに書く。-->
+								 <input type="hidden" th:field="*{evaluatereviewCount}" />
+								 <input type="hidden" th:field="*{type}" />
+								 <input type="hidden" th:field="*{sort}" />
+							  	 <label class="form-label text-black" for="review_description">レビュー</label>
+							  	 <textarea class="form-control" th:field="*{review}" rows="10" th:errorclass="error-field"></textarea>
+							 	 <p th:if="${#fields.hasErrors('review')}" class="error-message" th:errors="*{review}"></p>
+							</div>
+							 <input type="submit" value="投稿" class="btn w-100 btn-outline-dark">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

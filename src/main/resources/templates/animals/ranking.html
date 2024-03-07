@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<head>
+	<title>Animram</title>
+</head>
+
+<body>
+	<div class="ranking-index-wrapper" layout:fragment="contents">
+		<div class="container">
+			<div class="row  p-form-top"></div>
+			<h1 class="text-center">総合写真人気順</h1>
+		</div>
+		
+		<div class="containre text-center" th:each="ranking : ${list}" >
+			<!--AnimalForm(list)の全情報をrankingの中に入れる。-->
+			<div class="row justify-content-center">
+				<main class="col-md-6 mx-auto">
+					
+					
+                    <!--ranking(AnimalForm(list))の中にあるimageDataを表示させる-->
+					<img src="" th:if="${@environment.getProperty('image.local')}" th:src="${ranking.imageData}"class="image" />
+					<div style="text-align: center;" />
+					<img  th:src="${ranking.icon}"/>
+					<p>いいね数</p>
+					<p th:text="|${ranking.evaluateCount}人|">0</p>
+			
+					<!--imageData(写真)の下にレビューを表示したいからimageDataの下にth:each="top : ${ranking.top3}"を書く。リストの中のリストの中のフィールドを取り出したいときは"${ranking.top3.review}"と書いたらエラーになる。防ぐために入れ子を使って順番に取り出してる。-->
+					<h2 class="col-4"><img src = "/images/icons/star2.png"class="mb-2">上位レビュー<img src = "/images/icons/star2.png"class="mb-2"></h2 >
+					<div class="col-10 mb-4" th:each="top : ${ranking.top3}">
+						<div style="text-align: start;" />
+						<!--th:each="top : ${ranking.top3}"で1個ずつ情報をtopのなかに詰める。topの中にreviewsの情報が入っている。-->
+						<span class="me-5" th:text="|・${top.review}|"></span><br>
+						<!--th:each="top : ${ranking.top3}"で1個ずつ情報をtopのなかに詰める。topの中にevaluatereviewCountの情報が入っている。-->
+						</span><img src="/images/icons/ok.png" class="icon ms-5" /><span th:text="|イイね❕　${top.evaluatereviewCount}人|">
+					</div>
+				</main>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

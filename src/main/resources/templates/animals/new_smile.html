@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+          xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+          layout:decorate="~{layouts/layout}">
+    <head>
+        <title>Animram</title>
+    </head>
+    <body>
+		<div class = "animals-new-wrapper" layout:fragment = "contents">
+			<div class = "container">
+				<div class="row p-form-top"></div>
+				<h1>写真投稿</h1>
+					<div class = "row">
+						<div class = "col-md-6-mx-auto">
+							<form class = "new-animal" id = "new-animal" method = "post" th:action = "@{/animals/new_smile}" th:object = "${form}"
+							  enctype="multipart/form-data">
+								<div layout:replace="~{layouts/common::messages}"></div>
+								   <input type="hidden" th:field="*{type}" />
+									<input type="hidden" th:field="*{id}" /><!--編集画面には必要。記事編集書き込む等にID送信必要　新規投稿にはID必要ない。エラ-はでない。mapper使うから必要？-->
+										<div class = "mb-3">
+											<label class = "form-label text black" for = "animal_image">写真選択</label>
+												<input type = "file" class = "form-control-file" th:field = "*{image}"/>
+													<p th:if="${#fields.hasErrors('image')}" class="error-message" th:errors="*{image}"></p>
+										</div>	
+										<div class = "mb-3">
+											<label class = "form-label text black" for = "animal_description">写真説明</label>
+												<textarea class="form-control" th:field="*{description}" rows="10" th:errorclass="error-field"></textarea>
+													<p th:if="${#fields.hasErrors('description')}" class="error-message" th:errors="*{description}"></p>
+										</div>
+											<input type="submit" value="笑顔投稿" class="btn w-100 btn-outline-dark m-3" />								
+								</form>
+							</div>
+						</div>
+				</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+          xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+          layout:decorate="~{layouts/layout}">
+<body>
+	<div class = "shops-new-wrapper" layout:fragment = "contents">
+		<div class = "container">
+			<div class="row p-form-top"></div>
+			<div class = "row">
+				<div class = "col-6 mx-auto">
+					<h1>ショップ投稿</h1>
+					<form class = "new-shop" method = "post" th:action = "@{/shops/new_shop}" th:object = "${form}" enctype="multipart/form-data">
+						<div layout:replace="~{layouts/common::messages}"></div>
+						<div class = "mb-3">
+							<label class = "form-label text black" for = "shop_image" >写真選択</label>
+							<input type = "file" class = "form-control-file" th:field = "*{image}"/>
+							<p th:if="${#fields.hasErrors('image')}" class="error-message" th:errors="*{image}"></p>
+						</div>
+						<div class = "mb-3">
+							<label class = "form-label text black" for = "shop_address">ショップ住所</label>
+							<input type = "text" class = "form-control" placeholder="お店の場所を入力してください。" th:field = "*{address}"/>
+							<p th:if="${#fields.hasErrors('address')}" class="error-message" th:errors="*{address}"></p>
+						</div>
+						<div class = "mb-3">
+							<laber class = "form-label text black" for = "shop_money">見積金額</laber>
+							<input type = "number" step=1 class = "form-control" placeholder="金額を入力してください。" th:field = "*{money}"/>
+							<p th:if="${#fields.hasErrors('money')}" class="error-message"  th:errors="*{money}"></p>
+						</div>
+						<div class = "mb-3">
+							<label class = "form-laber" for = "shop_access">アクセス</label>
+							<input type = "text" class = "form-control" placeholder="お店の最寄り駅を入力してください。"　th:field = "*{access}"/>
+							<p th:if="${#fields.hasErrors('access')}" class="error-message" th:errors="*{access}"></p>
+						</div>
+						<div class = "mb-3">
+							<label class = "form-label" for = "shop_description">おすすめの理由</label>
+							<textarea class = "form-control" th:field = "*{shopDescription}"></textarea>
+							<p th:if="${#fields.hasErrors('shopDescription')}" class="error-message" th:errors="*{shopDescription}"></p>
+						</div>
+						<input type = "submit" value = "送信" class = "btn btn-outline-dark m-3"/>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

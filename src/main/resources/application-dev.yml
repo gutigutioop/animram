@@ -1,0 +1,13 @@
+spring:
+   jpa:
+    database: POSTGRESQL
+   datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/animram
+#    username: animram
+#    password: password
+    username: postgres
+    password: password
+debug: true
+image:
+  local: true

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+          xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+          layout:decorate="~{layouts/layout}">
+    <head>
+        <title>Animram</title>
+    </head>
+    <body>
+		<div class = "animals-top-wrapper" layout:fragment = "contents">
+			<div class = "container">
+				<div class="row p-form-top"></div>
+				<div class =  "row justify-content-center">
+						<h1 class="text-black text-center  mb-5">◎SHOW PET◎</h1>
+						<div class = "col-3 mx-auto">
+							<img src = "/images/icons/smile.JPG" class = "pet-image"><hr>
+							<a class = "b" th:href = "@{/animals/smile_index(sort=1)}">笑顔一覧ページへ</a>
+						</div>
+						<div class = "col-3 mx-auto">
+							<img src = "/images/icons/angry.JPG" class = "pet-image"><hr>
+							<a class = "b" th:href = "@{/animals/angry_index(sort=1)}">怒顔一覧ページへ</a>
+						</div>
+						<div class = "col-3 mx-auto">
+							<img src = "/images/icons/sad.JPG" class = "pet-image"><hr>
+							<a class = "b" th:href = "@{/animals/sad_index(sort=1)}">悲顔一覧ページへ</a>
+						</div>
+				</div>	
+				
+				<div class = "row  justify-content-center">
+							<h2 class = "text-black text-center m-5">写真投稿はこちら</h2>
+							<div class = "col-3 mx-auto">
+							<p><a class = "bt" th:href = "@{/animals/new_smile}">笑顔写真投稿</a></p>
+							</div>
+							<div class = "col-3 mx-auto ">
+							<p><a class = "bt" th:href = "@{/animals/new_angry}">怒顔写真投稿</a></p>
+							</div>
+							<div class = "col-3 mx-auto">
+							<p><a class = "bt" th:href = "@{/animals/new_sad}">悲顔写真投稿</a></p>
+							</div>
+				</div>
+				<div class = "row justify-content-center m-3">
+					
+					   
+						    <div class = "col-4 mx-auto">
+							
+								<a class="btn btn__border-outset" th:href = "@{/shop}">おすすめペットショップ</a>
+							</div>
+							<div class = "col-4 mx-auto">
+								
+								<a class="btn btn__border-outset" th:href = "@{/new_shop}">ショップ投稿</a>
+							</div>
+							<div class = "col-4 mx-auto">
+								
+								<a class="btn outset" th:href = "@{/rankings}">ランキングページへ</a>
+							</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<head>
+	<title>Animram</title>
+</head>
+
+<body>
+	<div class="animals-index-wrapper" layout:fragment="contents">
+		<div class="container">
+			<div class="row">
+				<nav>
+				<ul>
+				<li class="mb-3"><a class="text-start" th:href= "@{/animals/angry_index(sort=2)}">投稿順</a></li>
+				<li class="mb-3"><a class="text-start" th:href="@{/animals/angry_index(sort=3)}">人気順</a></li>
+				<li class="mb-3"><a class="text-start" th:href="@{/animals/angry_index(sort=4)}">レビューの多い順</a></li >
+				</ul>
+				</nav>
+			</div>
+				<div class="row" th:each="animal : ${list}">
+					<a th:id="${animal.type}"></a>
+					<div class="col-md-6 mx-auto">
+						<main>
+							<h6>投稿者</h6>
+							<p class='text-right' th:text="${animal.user.name}"></p>
+							<h6>ペット名</h6>
+							<p class='text-left' th:text="${animal.user.pet_name}"></p>
+							<h6>投稿時間</h6>
+							<p class='text-left' th:text="${#dates.format(animal.createdAt, 'yyyy/MM/dd')}"></p>
+							<div style="text-align: center;" />
+							<img src="" th:if="${@environment.getProperty('image.local')}" th:src="${animal.imageData}"
+								class="image" />
+							<img src="" th:unless="${@environment.getProperty('image.local')}" th:src="${animal.path}"
+								class="image" />
+							<div style="text-align: start;" />
+							<h6>写真の説明</h6>
+							<pre class="description" th:text="${animal.description}"></pre>
+							<div class="icons">
+								<!--いいね解除-->
+								<a th:if="${animal.evaluatedByMe}" rel="nofollow" class="icon convert"
+									data-method="delete" th:href="@{'/evaluate'}" th:data-animal_id="${animal.id}" th:data-sort="${sort}"
+									th:data-animal_type="${animal.type}" th:data-_csrf="${_csrf.token}">
+									<img class="evaluate-on" src="/images/heart.png"
+										th:src="@{/images/icons/heart.png}" />
+								</a>
+								<!--いいね登録-->
+								<a th:if="${!animal.evaluatedByMe}" rel="nofollow" class="icon convert" data-method="post"
+									th:href="@{'/evaluate'}" th:data-animal_id="${animal.id}" th:data-sort="${sort}"
+									th:data-animal_type="${animal.type}" th:data-_csrf="${_csrf.token}">
+									<img src="/images/icons/heart-black.png"
+										th:src="@{/images/icons/heart-black.png}" />
+								</a>
+								<span class="count" th:text="${#lists.size(animal.evaluates)}">0</span>
+								<!--レビュー登録-->
+								<a href="/animals/1/reviews/new" th:href="@{/animals/{animalid}/reviews/new(animalid=${animal.id},sort=${sort},type=${animal.type})}"
+									class="icon" th:data-_csrf="${_csrf.token}"> 
+									<img src="/images/icons/comment.png"
+										th:src="@{/images/icons/comment.png}" />
+								</a>
+							</div>
+							<!--レビュー一覧表示・レビューのいいね表示-->
+							<div class="comments">
+								<h3 class='text-center'>写真に対するレビュー</h3>
+								<ul th:each="comment : ${animal.reviews}">
+									
+									<li>
+										<div class="row align-items-start">
+											<pre class="description" th:text="${comment.review}"></pre>
+											<!--レビューいいね登録-->
+											<a th:if="${!comment.evaluatedByMe}" rel="nofollow" class="icon convert"
+												data-method="post" th:href="@{'/evaluate_review'}"
+												th:data-review_id="${comment.id}" th:data-animal_type="${animal.type}" th:data-sort="${sort}"
+												th:data-_csrf="${_csrf.token}">
+												<img class="evaluate-on"  src="/images/icons/iine2.png"
+												th:src="@{/images/icons/iine2.png}" />	
+											</a>
+											<!--レビューいいね解除-->
+											<a th:if="${comment.evaluatedByMe}" rel="nofollow" class="icon convert"
+												data-method="delete" th:href="@{'/evaluate_review'}"
+												th:data-review_id="${comment.id}" th:data-animal_type="${animal.type}" th:data-sort="${sort}"
+												th:data-_csrf="${_csrf.token}">
+												<img src="/images/icons/iine.png"
+												th:src="@{/images/icons/iine.png}" />	
+											</a>
+											<span class="count" th:text="${#lists.size(comment.evaluateUsers)}">0</span>
+										</div>
+									</li>
+									
+								</ul>
+							</div>
+	
+						</main>
+					</div>
+				</div>
+		<div class="container">
+			<button type="button" id="btn">トップへ</button>
+		</div>
+				<script>
+					const btn = document.getElementById("btn");
+					btn.addEventListener("click", () => {
+					  window.scroll({
+					    top: 0,
+					    behavior: "smooth",
+					  });
+					});
+				</script>
+				
+			</div>
+		</div>
+</body>
+
+</html>

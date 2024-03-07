@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+    <head>
+        <title>Animram</title>
+    </head>
+    <body>
+        <div class="pages-index-wrapper text-center" layout:fragment="contents">
+            <div class="container">
+                <div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
+                <h1 class="text-white">welcome</h1>
+                <h2 class="text-white">Peace with your pets!</h2>
+                <div class="d-none d-lg-block d-xl-block d-xxl-block">
+                    <div class="row justify-content-center">
+                        <div class="col-3">
+                            <a class="btn w-100 btn-outline-light" th:href="@{/users/new}">Sign up</a>
+                        </div>
+                        <div class="col-3">
+                            <a class="btn w-100 btn-outline-light" th:href="@{/login}">Log in</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-block d-lg-none d-xl-none d-xxl-none">
+                    <a class="btn w-100 btn-outline-light mb-3" href="/users/new">Sign up</a>
+                    <a class="btn w-100 btn-outline-light" href="/login">Log in</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

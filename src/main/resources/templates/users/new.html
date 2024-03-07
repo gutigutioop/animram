@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+          xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+          layout:decorate="~{layouts/layout}">
+    <head>
+        <title>Animram</title>
+    </head>
+    <body>
+        <div class="users-new-wrapper" layout:fragment="contents">
+            <div class="container">
+               
+                <div class="row">
+                    <main class="col-md-4 mx-auto">
+                        <h2 class="text-center text-black">sign up</h2><span>※がついてるのは必須項目です。</span>
+                        <form method="post" th:action="@{/users}" th:object="${form}" enctype="multipart/form-data">
+                            
+                            <div class="mb-3">
+                                <label class="form-label text-black" for="user_name">名前</label>
+                                <input type="text" class="form-control" th:field="*{name}" />
+                                <p th:if="${#fields.hasErrors('name')}" class="error-message" th:errors="*{name}"></p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-black" for="user_email">Email※</label>
+                                <input type="text" class="form-control" th:field="*{email}" />
+                                <p th:if="${#fields.hasErrors('email')}" class="error-message" th:errors="*{email}"></p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-black" for="user_password">パスワード※</label>
+                                <input class="form-control" type="password" th:field="*{password}" />
+                                <p th:if="${#fields.hasErrors('password')}" class="error-message" th:errors="*{password}">
+                                </p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-black" for="user_password_confirmation">パスワード確認※</label>
+                                <input type="password" class="form-control" th:field="*{passwordConfirmation}" />
+                                <p th:if="${#fields.hasErrors('passwordConfirmation')}" class="error-message" th:errors="*{passwordConfirmation}"></p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-black" for="user_pet_name">ペット名</label>
+                                <input class="form-control" type="text" th:field="*{pet_name}" />
+                                <p th:if="${#fields.hasErrors('pet_name')}" class="error-message" th:errors="*{pet_name}">
+                                </p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-black" for="age_id">年代</label>
+                                <select class="form-select" name="age_id" id="age_id" th:field="*{ageId}" >
+                               <th:block th:each="age : ${ages}">
+                               <option th:value="${age.id}" th:text="${age.name}" th:selected="${active == age.id}"></option>
+                               </th:block>
+                               </select>
+                             </div>
+                             <div class="mb-3">
+                               <label class="form-label text-black" for="user_avatar">プロフィール画像</label>
+                               <input type="file" class="form-control-file" th:field="*{ava}" />
+                               <p th:if="${#fields.hasErrors('ava')}" class="error-message" th:errors="*{ava}"></p>
+                             </div>
+                             <div class="mb-3">
+                               <label class="form-label text-black" for="user_pr">PR</label>
+                               <textarea class="form-control" th:field="*{pr}" rows="3" th:errorclass="error-field"></textarea>
+                               <p th:if="${#fields.hasErrors('pr')}" class="error-message" th:errors="*{pr}"></p>
+                             </div>
+                            <input type="submit" value="登録" class="btn w-50 btn btn-outline-dark" />
+                        </form>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

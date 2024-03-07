@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+          xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+          layout:decorate="~{layouts/layout}">
+<body>
+	<div class = "shop-review-wrapper" layout:fragment="contents">
+		<div class = "container">
+		
+			<div class = "row d-flex justify-content-center">
+				<div class ="col-6 mx-auto">
+				<h1>ショップのレビュー・評価投稿</h1>
+				</div>
+			</div>
+			<div class ="row d-flex justify-content-center">
+				<div class = "col-6 mx-auto" >
+					<form class = "shop-review" th:action = "@{/shops/__${form.shopId}__/review}" th:object = "${form}" method = "POST">
+						<label class = "form-label text black" for = "shop_shopReview">ショップのレビュー</label>
+						<textarea class="form-control" placeholder="レビュー・評価どちらか一方だけでも投稿出来ます。"  rows="3" th:field = "*{shopReview}"></textarea>
+						<span>お店の評価</span>
+						<select class="list-group" name= "shopEvaruate"  th:field = "*{shopEvaluate}">
+							<option class="list-group-item" value=0  th:selected="${active == 0}">選択なし</option>
+						    <option class="list-group-item"  value=1  th:selected="${active == 1}">おすすめ度１</option>
+						    <option class="list-group-item" value=2  th:selected="${active == 2}">おすすめ度2</option>
+						    <option class="list-group-item"  value=3  th:selected="${active == 3}">おすすめ度3</option>
+						    <option class="list-group-item"  value=4  th:selected="${active == 4}">おすすめ度4</option>
+						    <option class="list-group-item" value=5  th:selected="${active == 5}">おすすめ度5</option>
+						</select>
+						<!--<ul class="list-group" name="shopEvaruate" th:field = "*{shopEvaruate}" >
+							  <li class="list-group-item active" aria-disabled="true" value=0>選択なし</li>
+							  <li class="list-group-item" value=1>おすすめ度１</li>
+							  <li class="list-group-item" value=2>おすすめ度2</li>
+							  <li class="list-group-item" value=3>おすすめ度3</li>
+							  <li class="list-group-item" value=4>おすすめ度4</li>
+							  <li class="list-group-item" value=5>おすすめ度5</li>
+						</ul>-->
+						<input type="submit" value="登録" id="button" class="btn w-30 btn-outline-dark m-3" />
+					</form>					
+				</div>
+			</div>
+		</div>
+		<script>const btn = document.getElementById("button");
+			btn.addEventListener("click", (e) => {
+			  confirm("投稿しますか？評価は1回のみ出来ます。");
+			});
+		</script>
+	</div>
+</body>
+</html>

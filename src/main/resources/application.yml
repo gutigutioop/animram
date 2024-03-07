@@ -1,0 +1,27 @@
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+  
+  jpa:
+    database: POSTGRESQL
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/animram
+#    username: ${psql.user}
+#    password: ${psql.password}
+#    username: animram
+#    password: password
+    username: postgres
+    password: password
+#  data:
+#    web:
+#      pageable:
+#        one-indexed-parameters: true
+image:
+  local: true

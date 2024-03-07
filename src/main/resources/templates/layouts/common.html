@@ -1,0 +1,54 @@
+<<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+   <nav class="navbar navbar-expand-lg fixed-top navbar-dark" layout:fragment="nav">
+      <div class="container">
+		    <a class="navbar-brand" th:href="@{/top}">
+          <!--<img src="/images/icons/logo.png" th:src="@{/images/images/icons/logo.png}"
+           class="brand">-->
+           	<h1>show pet</h1>
+            </a>
+          
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>  
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+			
+			<!--<th:block sec:authorize="isAuthenticated()">認証がtrueなら-->
+			<th:block th:if="${loggedIn}">
+            <li class="nav-item">
+				 <a th:href="@{/logout}" class="nav-link convert"
+				  data-method="post" th:data-_csrf="${_csrf.token}">
+                <img src="/images/icons/logout.png" th:src="@{/images/icons/logout.png}">
+                 </a>
+            </li>
+            </th:block>
+            <!--<th:block sec:authorize="!isAuthenticated()">認証がfalseなら-->
+            <th:block th:if="${!loggedIn}">
+            <li class="nav-item">
+				<a class="nav-link" th:href="@{/users/new}">
+                <img src="/images/icons/register.png" th:src="@{/images/icons/register.png}">
+                 </a>
+            </li>
+            <li class="nav-item">
+				<a class="nav-link" th:href="@{/login}">
+                <img src="/images/icons/login.png" th:src="@{/images/icons/login.png}">
+                  </a>
+            </li>
+            </th:block>
+            <!--*/-->
+        </ul>
+      </div>
+      </div>
+    </nav>
+    <div id="messages" layout:fragment="messages" th:if="!${#lists.isEmpty(#fields.detailedErrors())}">
+      <ul>
+        <li th:each="error : ${#fields.detailedErrors()}" class="error-message" th:text="${error.message}"/>
+      </ul>
+    </div>
+</body>
+</html>
