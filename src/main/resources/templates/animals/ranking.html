@@ -27,13 +27,13 @@
 					<p th:text="|${ranking.evaluateCount}人|">0</p>
 			
 					<!--imageData(写真)の下にレビューを表示したいからimageDataの下にth:each="top : ${ranking.top3}"を書く。リストの中のリストの中のフィールドを取り出したいときは"${ranking.top3.review}"と書いたらエラーになる。防ぐために入れ子を使って順番に取り出してる。-->
-					<h2 class="col-4"><img src = "/images/icons/star2.png"class="mb-2">上位レビュー<img src = "/images/icons/star2.png"class="mb-2"></h2 >
+					<h2 class="col-4"><img th:src = "@{/images/icons/star2.png}"class="mb-2">上位レビュー<img th:src = "@{/images/icons/star2.png}"class="mb-2"></h2 >
 					<div class="col-10 mb-4" th:each="top : ${ranking.top3}">
 						<div style="text-align: start;" />
 						<!--th:each="top : ${ranking.top3}"で1個ずつ情報をtopのなかに詰める。topの中にreviewsの情報が入っている。-->
 						<span class="me-5" th:text="|・${top.review}|"></span><br>
 						<!--th:each="top : ${ranking.top3}"で1個ずつ情報をtopのなかに詰める。topの中にevaluatereviewCountの情報が入っている。-->
-						</span><img src="/images/icons/ok.png" class="icon ms-5" /><span th:text="|イイね❕　${top.evaluatereviewCount}人|">
+						</span><img th:src="@{/images/icons/ok.png}" class="icon ms-5" /><span th:text="|イイね❕　${top.evaluatereviewCount}人|">
 					</div>
 				</main>
 			</div>

@@ -128,7 +128,7 @@ public class UsersController {
     model.addAttribute("hasMessage", true);
     model.addAttribute("class", "alert-info");
     model.addAttribute("message", "ユーザー登録が完了しました。");
-    return "animals/top";
+    return "pages/index";
   }
 
   //画像を指定のローカルに保存するためのメソッド。

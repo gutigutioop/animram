@@ -20,6 +20,8 @@ public class CommonControllerAdvice {
   public void addAttributes(Principal principal, Model model) {
     // principalがnullなら未ログイン
     Boolean loggedIn = null != principal;
+    //プリンシパルなかのADMINを抜き出して、変数に入れる。
     model.addAttribute("loggedIn", loggedIn);
+    //model.add("isAdmin" ,USER_ADMIN);
   }
 }

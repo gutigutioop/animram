@@ -6,6 +6,20 @@ h1{
     color: #4be6bf;
 }
 
+#messages {
+  ul{
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    padding: 4px;
+    color: black;
+    li {
+      list-style: none;
+      padding: 4px 8px;
+      font-size: 18px;
+    }
+  }
+}
+
 h2{
     font-weight: 150px;
     font-family: 'Caveat', cursive;

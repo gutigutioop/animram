@@ -70,7 +70,7 @@ import com.example.animram.repository.ReviewRepository;
 		private String imageLocal;
 
 		// ランキング表示時の王冠アイコンの配列。
-		private static String[] icons = {"/images/icons/oukan.png", "/images/icons/oukan2.png", "/images/icons/oukan3.png"};
+		private static String[] icons = {"/animram/images/icons/oukan.png", "/animram/images/icons/oukan2.png", "/animram/images/icons/oukan3.png"};
 		
        //①笑顔の写真新規投稿画面表示用メソッド。3回同じ@GetMappingメソッド記入する。 enum使用にて新規投稿画面表示時に<input type="hidden" th:field="*{type}" />に番号が最初に割り当てられる。
 		@GetMapping("/animals/new_smile")
@@ -177,8 +177,7 @@ import com.example.animram.repository.ReviewRepository;
 				            redirAttrs.addFlashAttribute("class", "alert-info");
 				            redirAttrs.addFlashAttribute("message", "投稿に成功しました。");
 				            
-				            //Long sor =   session.getSort();
-		                    //return "animals/new_smile";
+				          
 				            return "redirect:/animals/smile_index?sort=1";
 				           
 				}

@@ -23,7 +23,7 @@
 						</div>
 						<div class = "mb-3">
 							<laber class = "form-label text black" for = "shop_money">見積金額</laber>
-							<input type = "number" step=1 class = "form-control" placeholder="金額を入力してください。" th:field = "*{money}"/>
+							<input type = "number" class = "form-control" placeholder="金額を入力してください。" th:field = "*{money}"/>
 							<p th:if="${#fields.hasErrors('money')}" class="error-message"  th:errors="*{money}"></p>
 						</div>
 						<div class = "mb-3">

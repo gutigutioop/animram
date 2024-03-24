@@ -19,6 +19,9 @@
         <ul class="navbar-nav ms-auto">
 			
 			<!--<th:block sec:authorize="isAuthenticated()">認証がtrueなら-->
+				<!--<th:block th:if="${ADMIN}">
+					adominnだけ見れる遷移アイコン
+				</th:block>-->
 			<th:block th:if="${loggedIn}">
             <li class="nav-item">
 				 <a th:href="@{/logout}" class="nav-link convert"

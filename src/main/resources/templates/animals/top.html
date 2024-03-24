@@ -12,15 +12,15 @@
 				<div class =  "row justify-content-center">
 						<h1 class="text-black text-center  mb-5">◎SHOW PET◎</h1>
 						<div class = "col-3 mx-auto">
-							<img src = "/images/icons/smile.JPG" class = "pet-image"><hr>
+							<img th:src = "@{/images/icons/smile.JPG}" class = "pet-image"><hr>
 							<a class = "b" th:href = "@{/animals/smile_index(sort=1)}">笑顔一覧ページへ</a>
 						</div>
 						<div class = "col-3 mx-auto">
-							<img src = "/images/icons/angry.JPG" class = "pet-image"><hr>
+							<img th:src = "@{/images/icons/angry.JPG}" class = "pet-image"><hr>
 							<a class = "b" th:href = "@{/animals/angry_index(sort=1)}">怒顔一覧ページへ</a>
 						</div>
 						<div class = "col-3 mx-auto">
-							<img src = "/images/icons/sad.JPG" class = "pet-image"><hr>
+							<img th:src = "@{/images/icons/sad.JPG}" class = "pet-image"><hr>
 							<a class = "b" th:href = "@{/animals/sad_index(sort=1)}">悲顔一覧ページへ</a>
 						</div>
 				</div>	

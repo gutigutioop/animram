@@ -244,10 +244,7 @@ public class ShopsController {
 	       List<Shop> shops   = shopPages.getContent();
 	        List<ShopForm> list = new ArrayList<>();
 	        
-	        //shopidを取り出して、shopentityの情報を評価順に取り出す。
-	        //List<ShopReview> uu = reviewRepository. findAllBy();
-	        //Long yy = uu.getShopId();
-	        //List<Shop>  shops = repository.findByAll(yy);
+	       
 	        
 	       for(Shop entity : shops ) {
 	    	  
@@ -318,14 +315,7 @@ public class ShopsController {
 		                    os.write(indata, 0, size);
 		                }
 	        		
-	        		/*int line;
-	        		while (true) {
-	        		    line = is.read();
-	        		    if (line == -1) {
-	        		        break;
-	        		    }
-	        		   
-	        		}*/
+	        		
 		                String mimetype = getMimeType(entity.getShopPath());
 		              
 		                String base = new String(Base64.getEncoder().encodeToString(os.toByteArray()));
@@ -341,8 +331,10 @@ public class ShopsController {
 	        
 	        List<ShopReviewForm> shopreviews = new ArrayList<>();
 	        for(ShopReview shopreview : entity.getShopReviews()) {
+	        	if (!shopreview.getShopReview().isEmpty()) {
 	        	ShopReviewForm shopreviewform = modelMapper.map(shopreview, ShopReviewForm.class);
 	        	 shopreviews.add(shopreviewform);
+	        	}
 	        }
 	        
 	        form.setShopreviews(shopreviews);

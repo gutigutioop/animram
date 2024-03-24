@@ -1,121 +1,106 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-          xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-          layout:decorate="~{layouts/layout}">
- <body>
-	<div class ="shops-index-wrapper" layout:fragment="contents">
-		<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-		<script defer
-			th:src="|https://maps.googleapis.com/maps/api/js?key=AIzaSyDWwM1EBhLYquLg9eXeuFxnr8UqrljJW5c
-			&callback=initMap|"></script>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
 
-		<style type="text/css">
-			.map {
-				height: 100%;
-			}
-		</style>
-		<script th:inline="javascript">
-			function initMap() {
-				/*[# th:each="topic : ${list}"]*/
-				/*[# th:if="${topic.latitude != null and topic.longitude != null}"]*/
-				new google.maps.Map(document.getElementById("map[[${shop.id}]]"), {
-					center: {lat: -34.397, lng: 150.644},
-					zoom: 16,
-				});
-				/*[/]*/
-				/*[/]*/
-			}
-		</script>
-		<div class ="containe">
+<body>
+	<div class="shops-index-wrapper" layout:fragment="contents">
+		<div class="containe">
 			<div class="row p-form-top"></div>
-			<div class = "row">
+			<div class="row">
 				<h1 class="text-center">おすすめペットショップ</h1>
-				<div class = "col-md-6 mx-auto">
-					<form class = "like-shops" method = "Get" th:action = "@{/shops}">
-						<label class = "form-laber text black" for = "shop_address">お店の住所検索</label>
-						<nobr><input type = "text" class = "form-control" placeholder="住所を入力してください。" name = "address"/>
-						<input type="submit" value="絞り込み" class="btn w-30 btn-outline-dark m-3" /></nobr>
+				<div class="col-md-6 mx-auto">
+					<form class="like-shops" method="Get" th:action="@{/shops}">
+						<label class="form-laber text black" for="shop_address">お店の住所検索</label>
+						<nobr><input type="text" class="form-control" placeholder="住所を入力してください。" name="address" />
+							<input type="submit" value="絞り込み" class="btn w-30 btn-outline-dark m-3" />
+						</nobr>
 					</form>
 				</div>
 			</div>
-			<div class = "row"  th:each = "shop : ${list}">
+			<div class="row" th:each="shop : ${list}">
 				<div class="col-md-6 mx-auto">
 					<main>
-					<a th:id="${shop.id}"></a>
-					<img src="" th:if="${@environment.getProperty('image.local')}" th:src="${shop.imageData}"class="image" />
-					
-						
-					
-					<a th:href="@{/shops/{shopId}/reviews/new(shopId=${shop.id})}"
-						class="icon" th:data-_csrf="${_csrf.token}"> 
-					   <img src="/images/icons/comment.png" th:src="@{/images/icons/comment.png}" />
-					</a>
-					<div class="index"><span><ショップの内容></span>
-					<pre class = "text-left" th:text = "|評価平均: ${shop.shopEvaluateCountDouble}|"></pre>
-					<pre class = "text-left" th:text = "|住所: ${shop.address}|"></pre>
-					<pre class = "text-left" th:text = "|アクセス: ${shop.access}|"></pre>
-					<pre class = "text-left" th:text = "|金額の目安: ${shop.money}|"></pre>
-					<pre class = "text-left" th:text = "|おすすめ理由: ${shop.shopDescription}|"></pre>
-					</div>
-					
-				</main>
-				<span><ショップのレビュー></span>
-					<section th:each = "shopreview : ${shop.shopreviews}">
-								<p th:text="|${shopreview.shopReview}|"></p>
+						<a th:id="${shop.id}"></a>
+						<img src="" th:if="${@environment.getProperty('image.local')}" th:src="${shop.imageData}"
+							class="image" />
+
+
+
+						<a th:href="@{/shops/{shopId}/reviews/new(shopId=${shop.id})}" class="icon"
+							th:data-_csrf="${_csrf.token}">
+							<img src="/images/icons/comment.png" th:src="@{/images/icons/comment.png}" />
+						</a>
+						<div class="index"><span>
+								<ショップの内容>
+							</span>
+							<pre class="text-left" th:text="|評価平均: ${shop.shopEvaluateCountDouble}|"></pre>
+							<pre class="text-left" th:text="|住所: ${shop.address}|"></pre>
+							<pre class="text-left" th:text="|アクセス: ${shop.access}|"></pre>
+							<pre class="text-left" th:text="|金額の目安: ${shop.money}|"></pre>
+							<pre class="text-left" th:text="|おすすめ理由: ${shop.shopDescription}|"></pre>
+						</div>
+						<!--<div style="height: 320px" th:if="${shop.latitude != null and shop.longitude != null}">
+							<div class="map" th:id="|map${shop.id}|"></div>
+						</div>-->
+					</main>
+					<span>
+						<ショップのレビュー>
+					</span>
+					<section th:each="shopreview : ${shop.shopreviews}">
+						<img th:src="@{/images/icons/syar3.png}">
+						<span th:text="|${shopreview.shopReview}|"></span>
 					</section>
+				</div>
 			</div>
-		</div>
-				
-			<div class ="row justify-content-center">
-				<div class="paging" >
+
+			<div class="row justify-content-center">
+				<div class="paging">
 					<ul>
 						<th:block th:if="${sankou}==1">
-						<li style="display:inline;">
-							<span th:if="${pagenation.first}">&lt;&lt;前</span>
-							<a th:if="${!pagenation.first}"
-						        th:href="@{/shop(page = ${pagenation.getNumber()} - 1)}">&lt;&lt;前</a>
-						 </li>
-						 <li th:each="i : ${#numbers.sequence(0, pagenation.totalPages - 1)}" style="display:inline; margin-left:10px;">
-							  <span th:if="${i} == ${pagenation.number}" th:text="${i + 1}">1</span>
-						      <a th:if="${i} != ${pagenation.number}" th:href="@{/shop(page = ${i})}">
-							  <span th:text="${i+1}">1</span>
-						      </a>
-						 </li>
-						 <li style="display:inline; margin-left:10px;">
-							 <span th:if="${pagenation.isLast}">次&gt;&gt;</span>
-							 <a th:if="${!pagenation.isLast}" th:href="@{/shop(page = (${pagenation.number} + 1))}">
-						       次&gt;&gt;</a>
-    					</li>
-    					</th:block>
-    					<th:block th:if="${sankou}==2">
 							<li style="display:inline;">
 								<span th:if="${pagenation.first}">&lt;&lt;前</span>
 								<a th:if="${!pagenation.first}"
-							        th:href="@{/shops(page = ${pagenation.getNumber()} - 1,address=${param.address[0]})}">&lt;&lt;前</a>
-							 </li>
-							 <li th:each="i : ${#numbers.sequence(0, pagenation.totalPages - 1)}" style="display:inline; margin-left:10px;">
-								  <span th:if="${i} == ${pagenation.number}" th:text="${i + 1}">1</span>
-							      <a th:if="${i} != ${pagenation.number}" th:href="@{/shops(page = ${i},address=${param.address[0]})}">
-								  <span th:text="${i+1}">1</span>
-							      </a>
-							 </li>
-							 <li style="display:inline; margin-left:10px;">
-								 <span th:if="${pagenation.isLast}">次&gt;&gt;</span>
-								 <a th:if="${!pagenation.isLast}" th:href="@{/shops(page = (${pagenation.number} + 1),address=${param.address[0]})}">
-							       次&gt;&gt;</a>
-	    					</li>
-    					</th:block>
+									th:href="@{/shop(page = ${pagenation.getNumber()} - 1)}">&lt;&lt;前</a>
+							</li>
+							<li th:each="i : ${#numbers.sequence(0, pagenation.totalPages - 1)}"
+								style="display:inline; margin-left:10px;">
+								<span th:if="${i} == ${pagenation.number}" th:text="${i + 1}">1</span>
+								<a th:if="${i} != ${pagenation.number}" th:href="@{/shop(page = ${i})}">
+									<span th:text="${i+1}">1</span>
+								</a>
+							</li>
+							<li style="display:inline; margin-left:10px;">
+								<span th:if="${pagenation.isLast}">次&gt;&gt;</span>
+								<a th:if="${!pagenation.isLast}" th:href="@{/shop(page = (${pagenation.number} + 1))}">
+									次&gt;&gt;</a>
+							</li>
+						</th:block>
+						<th:block th:if="${sankou}==2">
+							<li style="display:inline;">
+								<span th:if="${pagenation.first}">&lt;&lt;前</span>
+								<a th:if="${!pagenation.first}"
+									th:href="@{/shops(page = ${pagenation.getNumber()} - 1,address=${param.address[0]})}">&lt;&lt;前</a>
+							</li>
+							<li th:each="i : ${#numbers.sequence(0, pagenation.totalPages - 1)}"
+								style="display:inline; margin-left:10px;">
+								<span th:if="${i} == ${pagenation.number}" th:text="${i + 1}">1</span>
+								<a th:if="${i} != ${pagenation.number}"
+									th:href="@{/shops(page = ${i},address=${param.address[0]})}">
+									<span th:text="${i+1}">1</span>
+								</a>
+							</li>
+							<li style="display:inline; margin-left:10px;">
+								<span th:if="${pagenation.isLast}">次&gt;&gt;</span>
+								<a th:if="${!pagenation.isLast}"
+									th:href="@{/shops(page = (${pagenation.number} + 1),address=${param.address[0]})}">
+									次&gt;&gt;</a>
+							</li>
+						</th:block>
 					</ul>
-				 </div>
-			 </div>
+				</div>
+			</div>
 		</div>
 	</div>
- </body>
+</body>
+
 </html>
-						        
-						      
-						     
-						      
-							
-							
-						
